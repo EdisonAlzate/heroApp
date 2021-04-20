@@ -1,7 +1,26 @@
-import React from 'react'
-import {  NavLink } from 'react-router-dom'
+import React, { useContext } from 'react'
+import {  NavLink, useHistory } from 'react-router-dom'
+import { ContextApp } from '../data/ContextApp'
+import { types } from '../types.js/types'
 
 export const Navbar = () => {
+    
+    
+    const {user:{name},dispatch} = useContext(ContextApp)
+    console.log(name)
+    const history =useHistory()
+    
+    const handleLogout=()=>{
+        dispatch({
+            type:types.logout,
+            
+
+        })
+        console.log('try Logout')
+        history.replace("/login")
+    }
+    
+    
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
             
@@ -28,7 +47,7 @@ export const Navbar = () => {
                     >
                         DC
                     </NavLink>
-
+                <div>
                     <NavLink 
                         activeClassName="active"
                         className="nav-item nav-link" 
@@ -37,19 +56,27 @@ export const Navbar = () => {
                     >
                         Search
                     </NavLink>
+
+                    
+
+                </div>
+                    
                 </div>
             </div>
 
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
-                    <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
-                        to="/login"
-                    >
+                
+                <span className="nav-item nav-link text-info"> 
+                    {name} 
+                </span>
+                
+                        <button 
+                            onClick={handleLogout}
+                        >
                         Logout
-                    </NavLink>
+                        </button>      
+                        
                 </ul>
             </div>
         </nav>
