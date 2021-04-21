@@ -6,19 +6,23 @@ import { types } from '../types.js/types'
 export const LoginScreen = ({history}) => {
     const {dispatch} = useContext(ContextApp)
     
-    const handleLogin=()=>{
-        console.log('try loggin')
-        dispatch({
-            type:types.login,
-            payload:{
-                name:"Edison"
-            }
-        }
-        )
-        
-        history.goBack("/") 
-   }
     
+    
+   const handleLogin = () => {
+
+    const lastPath = localStorage.getItem(('lastPath') || "/")
+        console.log(lastPath)
+    dispatch({
+        type: types.login,
+        payload: {
+            name: 'Fernando'
+        }
+    });
+
+    history.goBack( lastPath );
+    
+}
+
     return (
         <button 
             className="btn btn-primary"
